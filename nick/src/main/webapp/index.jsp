@@ -18,7 +18,7 @@
 	        <button type="submit" name="log" id="log">Sign In</button>
 	        <div class="forgot-signup">
 		        <button type="button" name="pass" class="Pass">Forgot Password</button>
-		        <button type="button" name="signup" class="Pass">Sign Up</button>
+		        <button type="button" name="signup" class="Pass" onclick="window.location.href='signup.jsp'">Sign Up</button>
 	        </div>
 	        <br><br>
 	    </form>
