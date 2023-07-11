@@ -9,12 +9,16 @@
 <body>
     <h2>Shuffle Buddy</h2><br>
     <div class="login">
-        <form id="login" method="post" action="login.jsp">
+        <form id="login" action="auth_server" method="GET" >
             <label for="Uname" class="form-label">User Name</label>
             <input type="text" name="Uname" id="Uname" class="input-uname-password" placeholder="Username">
             <label for="Pass" class="form-label">Password</label>
             <input type="password" name="Pass" id="Pass" class="input-uname-password" placeholder="Password">
             <button type="submit" name="log" id="log">Sign In</button>
+            <% String errorMessage = (String) request.getAttribute("errorMessage");
+	        if (errorMessage != null) { %>
+	          <p><%= errorMessage %></p>
+	        <% } %>
             <div class="forgot-signup">
                 <button type="button" name="pass" class="Pass" onclick="window.location.href='jsp/forgotpass.jsp'">Forgot Password</button>
                 <button type="button" name="signup" class="Pass" onclick="window.location.href='jsp/signup.jsp'">Sign Up</button>
