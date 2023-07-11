@@ -5,11 +5,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Sign Up</title>
-<link rel="stylesheet" type="text/css" href="signup.css">
+<link rel="stylesheet" type="text/css" href="../css/signup.css">
 </head>
 <body>
     <h2>Sign Up</h2>
-    <form id="signup-form" action="newuserdata" method="POST">
+    <form id="signup-form" action="../newuserdata" method="POST">
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>

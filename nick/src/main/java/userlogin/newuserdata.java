@@ -67,8 +67,9 @@ public class newuserdata extends HttpServlet {
 
 		    if (rowsInserted > 0) {
 		    	
+		    	request.setAttribute("successMessage", "Signup Successful!");
 		        out.println("User data inserted successfully.");
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/index.jsp");
                 dispatcher.forward(request, response);
 		        
 		    } else {
@@ -81,8 +82,9 @@ public class newuserdata extends HttpServlet {
 			
 			
 		
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println(e);
 			e.printStackTrace();
 		}
 	}

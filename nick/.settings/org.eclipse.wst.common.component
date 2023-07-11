@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="nick">
+        
+    <wb-module deploy-name="cs157a_team2">
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <property name="context-root" value="nick"/>
-        <property name="java-output-path" value="/nick/build/classes"/>
+                
+        <property name="java-output-path" value="/cs157a_team2/build/classes"/>
+        <property name="context-root" value="cs157a_team2"/>
+            
     </wb-module>
+    
 </project-modules>
