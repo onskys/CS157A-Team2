@@ -60,6 +60,7 @@
 
     function goToDefaultPlaylist() {
       console.log("Go to default playlist clicked");
+      window.location.href='default.jsp'
     }
   </script>
 </body>
