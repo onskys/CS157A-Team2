@@ -1,76 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.Objects" %>
+<%@ page import="java.util.Optional" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Update Password</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 200px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        p.error {
-            color: #FF0000;
-        }
-    </style>
+    <title>Password Reset</title>
+    <link rel="stylesheet" type="text/css" href="../css/forgotpassword.css">
 </head>
 <body>
-    <h1>Update Password</h1>
-    <form action="passwordupdate" method="post">
-        <label for="username">User name:</label>
-        <input type="text" name="username" id="username" required><br><br>
-        <button type="submit">Sign Up</button>
+    <h2>Password Reset</h2>
+
+    <form method="post" action="../reset_password_servlet">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Username" required><br><br>
+
+        <input type="submit" value="Submit">
     </form>
-    
+
     <hr>
-    
-    <%-- Check if security question and answer should be displayed --%>
-    <c:if test="${not empty question}">
-        <form action="updatePassword" method="post">
-            <input type="hidden" name="username" value="${username}">
-            <input type="hidden" name="securityQuestion" value="${question}">
-            
-            <label for="answer">Answer the security question:</label>
-            <input type="text" name="answer" id="answer" required><br><br>
-            
-            <label for="newPassword">Enter new password:</label>
-            <input type="password" name="newPassword" id="newPassword" required><br><br>
-            
-            <input type="submit" value="Update Password">
+
+    <%-- Check if securityQuestion exists in the request --%>
+    <% if (request.getAttribute("securityQuestion") != null) { %>
+        <form method="get" action="passwordupdate">
+            <input type="hidden" name="username" value="<%= request.getAttribute("username") %>">
+
+            <label for="securityAnswer">Security Question:</label>
+            <p><%= request.getAttribute("securityQuestion") %></p>
+
+            <label for="securityAnswer">Security Answer:</label>
+            <input type="text" id="securityAnswer" name="securityAnswer" required><br><br>
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required><br><br>
+
+            <input type="submit" value="Reset Password">
         </form>
-    </c:if>
-    
-    <%-- Display error message if provided username is not valid --%>
-    <c:if test="${not empty error}">
-        <p class="error">${error}</p>
-    </c:if>
+    <% } %>
+
+    <%-- Check if resetStatus exists in the request --%>
+<% String resetStatus = request.getParameter("resetStatus"); %>
+<% if (resetStatus != null) { %>
+    <p><%= resetStatus %></p>
+<% } %>
 </body>
 </html>

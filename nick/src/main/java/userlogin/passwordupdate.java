@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,8 @@ public class passwordupdate extends HttpServlet {
         try {
             Connection con = databaseconnection.getConnection();
             String question = getSecurityQuestion(con, username);
-
+            System.out.println("HHHhhhhhhhhhhhhhhhhh");
+            System.out.println(question);   
             if (question != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
@@ -56,7 +58,32 @@ public class passwordupdate extends HttpServlet {
 
         resultSet.close();
         statement.close();
-
+        
         return question;
     }
-}
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    	String username = request.getParameter("username");
+    	String newpass = request.getParameter("newPassword");
+    	try {
+    	    Connection con = databaseconnection.getConnection();
+    	    String sql = "UPDATE user SET user_password = ? WHERE username = ?;";
+    	    PreparedStatement statement = con.prepareStatement(sql);
+    	    statement.setString(1, newpass);
+    	    statement.setString(2, username);
+    	    int rowsAffected = statement.executeUpdate();
+    	    statement.close();
+    	    con.close();
+
+    	    RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/index.jsp");
+    	    dispatcher.forward(request, response);
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	}
+    	
+    	
+    	
+    	
+    }
+    }
