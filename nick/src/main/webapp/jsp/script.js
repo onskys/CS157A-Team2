@@ -1,7 +1,7 @@
 const albums = [
   {
     album: "Stay",
-    spotify: "https://open.spotify.com/embed/track/5HCyWlXZPP0y6Gqq8TgA20?utm_source=generator",
+    spotify: "https://embed-standalone.spotify.com/embed/track/5HCyWlXZPP0y6Gqq8TgA20?utm_source=generator",
   },
   {
     album: "where she goes",
