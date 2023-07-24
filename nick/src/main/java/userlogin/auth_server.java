@@ -51,7 +51,7 @@ public class auth_server extends HttpServlet {
       if (isValid) {
          // Redirect to the home page or perform other actions for successful login
          out.println("is valid");
-         response.sendRedirect("jsp/home_screen.jsp");
+         response.sendRedirect("jsp/music.jsp");
       } else {
          // Password is incorrect
          out.println("is not valid");
