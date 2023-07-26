@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="userlogin.databaseconnection"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +15,18 @@
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <% 
+            
             String username = request.getParameter("username");
             if (username != null && !username.isEmpty()) {
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
+                    /* Class.forName("com.mysql.jdbc.Driver");
                     String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
                     String dbUser = "root";
                     String dbPassword = "Shroot123@";
-                    Connection con = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+                    Connection con = DriverManager.getConnection(dbURL, dbUser, dbPassword); */
+                    Connection con = databaseconnection.getConnection();
                     Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "'");
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "'");
                     
                     if (rs.next()) {
                     	System.out.println("here");
@@ -36,7 +39,7 @@
                     rs.close();
                     stmt.close();
                     con.close();
-                } catch (SQLException | ClassNotFoundException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
@@ -60,12 +63,13 @@
                 <option> Select a security question</option>
                 <% 
                     try {
-                        java.sql.Connection con;
+                        /* java.sql.Connection con;
                         Class.forName("com.mysql.jdbc.Driver");
                         String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
                         String dbUser = "root";
                         String dbPassword = "Shroot123@";
-                        con = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+                        con = DriverManager.getConnection(dbURL, dbUser, dbPassword); */
+                        Connection con = databaseconnection.getConnection();
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT security_id, question_text FROM security_question");
                         
@@ -80,7 +84,7 @@
                         rs.close();
                         stmt.close();
                         con.close();
-                    } catch (SQLException | ClassNotFoundException e) {
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 %>

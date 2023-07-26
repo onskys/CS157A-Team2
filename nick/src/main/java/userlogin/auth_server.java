@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import userlogin.databaseconnection;
 
 import java.sql.*;
@@ -33,7 +35,7 @@ public class auth_server extends HttpServlet {
          out.println(" database successfully opened.<br/><br/>");
          // Statement stmt = con.createStatement();
          // ResultSet rs = stmt.executeQuery("SELECT * FROM Listener WHERE username='" + user_username + "' AND password='" + user_password);
-         PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE BINARY username=? and BINARY user_password=?");  
+         PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE BINARY username=? and BINARY password=?");  
          ps.setString(1,user_username);  
          ps.setString(2,user_password);  
                
@@ -50,8 +52,10 @@ public class auth_server extends HttpServlet {
 
       if (isValid) {
          // Redirect to the home page or perform other actions for successful login
+    	 HttpSession session = request.getSession(); // 'request' is the HttpServletRequest object
+     	 session.setAttribute("username", user_username);
          out.println("is valid");
-         response.sendRedirect("jsp/music.jsp");
+         response.sendRedirect("jsp/home_screen.jsp");
       } else {
          // Password is incorrect
          out.println("is not valid");

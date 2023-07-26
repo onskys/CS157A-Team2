@@ -47,7 +47,7 @@ public class passwordupdate extends HttpServlet {
 
     private String getSecurityQuestion(Connection con, String username) throws SQLException {
         String question = null;
-        String sql = "SELECT question_text FROM security_question WHERE security_id = (Select security_id from user WHERE username = ?)";
+        String sql = "SELECT question_text FROM security_question WHERE security_id = (Select security_id from users WHERE username = ?)";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
@@ -68,7 +68,7 @@ public class passwordupdate extends HttpServlet {
     	String newpass = request.getParameter("newPassword");
     	try {
     	    Connection con = databaseconnection.getConnection();
-    	    String sql = "UPDATE user SET user_password = ? WHERE username = ?;";
+    	    String sql = "UPDATE user SET password = ? WHERE username = ?;";
     	    PreparedStatement statement = con.prepareStatement(sql);
     	    statement.setString(1, newpass);
     	    statement.setString(2, username);
