@@ -7,4 +7,9 @@ Current functionality:
 - The sign-up page fetches security questions from the database.
 - Users can sign in with their credentials and be taken to the "home" page.
 - Users can reset their password using their security question.
-- Signing in currently displays a list of songs using JS, we are testing how to fetch songs from the DB.
+- Signing in allows playlist selection.
+- Selecting a playlist displays all the songs in a playlist.
+- Listening to a playlist starts a session (partially complete).
+- Started working on editing playlists (uses all CRUD operations).
+
+
