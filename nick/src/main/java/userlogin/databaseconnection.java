@@ -14,11 +14,12 @@ public class databaseconnection extends HttpServlet {
     public databaseconnection() {
         super();
     }
-
+    
+    // Used for establishing connection to database.Update url,username,password with your mysql credentials
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
         String username = "root";
-        String password = "Shroot123@";
+        String password = "LTAndr3w";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
