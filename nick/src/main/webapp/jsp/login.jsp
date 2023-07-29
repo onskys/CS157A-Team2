@@ -15,14 +15,14 @@
 	String db = "cs157a_team2";
     String user;
     user = "root";
-    String password = "Shroot123@";
+    String password = "LTAndr3w";
     try {
         
         java.sql.Connection con; 
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false",user, password);
         Statement stmt = con.createStatement();
-        String Query = "SELECT COUNT(*) from user where BINARY Username = '" + Username + "' and BINARY user_password = '" + Password + "'";
+        String Query = "SELECT COUNT(*) from user where BINARY username = '" + Username + "' and BINARY password = '" + Password + "'";
         ResultSet rs = stmt.executeQuery(Query);
         int count = 0;
         if (rs.next()) {

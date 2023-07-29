@@ -53,7 +53,7 @@ public class newuserdata extends HttpServlet {
 		    String security_id = request.getParameter("security-question");
 		    String security_answer = request.getParameter("Security-answer");
 		    // Prepare the SQL statement
-		    String sql = "INSERT INTO user (username, firstname, lastname, user_password,security_id,security_answer) VALUES (?, ?, ?, ?, ?, ?)";
+		    String sql = "INSERT INTO user (username, first_name, last_name, password,security_id,security_answer) VALUES (?, ?, ?, ?, ?, ?)";
 		    PreparedStatement statement = con.prepareStatement(sql);
 		    statement.setString(1, username);
 		    statement.setString(2, firstname);
