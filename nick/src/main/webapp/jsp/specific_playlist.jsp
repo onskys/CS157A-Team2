@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="userlogin.databaseconnection"%>
+
 <html>
 <head>
 <title>Shuffle Buddy - Music Web App</title>
@@ -49,12 +51,9 @@ h1 {
 	<ul>
 		<%
 		try{
-			java.sql.Connection con;
-            Class.forName("com.mysql.jdbc.Driver");
-            String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
-            String dbUser = "root";
-            String dbPassword = "sbhSQLcc59!3%";
-            con = DriverManager.getConnection(dbURL, dbUser, dbPassword);        	System.out.println(" database connection successfully opened.<br/><br/>");
+			
+			Connection con = databaseconnection.getConnection();
+			System.out.println(" database connection successfully opened.<br/><br/>");
         	PreparedStatement ps = con.prepareStatement("SELECT name, artist FROM playlist_contains_songs JOIN song ON playlist_contains_songs.spotify_uri = song.spotify_uri WHERE playlist_id =?");
         	//System.out.println("this is selected playlist" + session.getAttribute("selectedPlaylistID"));
         	ps.setString(1,(String) session.getAttribute("selectedPlaylistID"));
