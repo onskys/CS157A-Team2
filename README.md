@@ -10,6 +10,5 @@ Current functionality:
 - Signing in allows playlist selection.
 - Selecting a playlist displays all the songs in a playlist.
 - Listening to a playlist starts a session (partially complete).
-- Started working on editing playlists (uses all CRUD operations).
-
+- Playlist editor is functional, add and delete songs from your playlist.
 
