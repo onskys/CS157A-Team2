@@ -83,9 +83,8 @@ h1 {
 	</form>
 
 	<div class="button-container">
-		<a href="#" class="button" onclick="createPlaylist()">Create NewPlaylist</a>
-		<!-- <a href="#" class="button" onclick="selectPlaylist()">SelectPlaylist</a> -->
-		<!-- <a href="#" class="button" onclick="goToDefaultPlaylist()">Goto Default Playlist</a> -->
+		<a href="#" class="button" onclick="createPlaylist()">Create New Playlist</a>
+	    <a href="#" class="button" onclick="goToDefaultPlaylist()">Go To Default Playlist</a>
 	</div>
 
 	<script>
@@ -101,13 +100,13 @@ h1 {
 	    }
 	
 	
-		/* function createPlaylist() {
-			console.log("Create playlist clicked");
+		function createPlaylist() {
+			window.location.href='../jsp/new_playlist.jsp'
 		}
-
-		function selectPlaylist() {
-			console.log("Select playlist clicked");
-		} */
+		
+		function goToDefaultPlaylist() {
+			window.location.href='../jsp/default.jsp'
+		}
 	</script>
 </body>
 </html>
