@@ -34,11 +34,13 @@ public class remove_playlist extends HttpServlet {
 		try {
 			Connection con = databaseconnection.getConnection();
 	        
-	        PreparedStatement deletePlaylist = con.prepareStatement("DELETE FROM playlist WHERE playlist_id = " + playlistToRemove);
+	        PreparedStatement deletePlaylist = con.prepareStatement("DELETE FROM playlist WHERE playlist_id = ?");
+	        deletePlaylist.setString(1, playlistToRemove);
 	        
 	        deletePlaylist.execute();
 	        
-	        PreparedStatement deleteCreated = con.prepareStatement("DELETE FROM created WHERE playlist_id = " + playlistToRemove);
+	        PreparedStatement deleteCreated = con.prepareStatement("DELETE FROM created WHERE playlist_id = ?");
+	        deleteCreated.setString(1, playlistToRemove);
 	        
 	        deleteCreated.execute();
 	        

@@ -73,10 +73,9 @@ public class editor extends HttpServlet {
 		        break;
 	        }
 	        
-	        String deleteStatement = "DELETE FROM playlist_contains_songs WHERE spotify_uri = '" + toDelete + "'";
-	        System.out.println(deleteStatement);
-		    PreparedStatement sqlDelete = con.prepareStatement(deleteStatement);
-		    sqlDelete.executeUpdate();
+	        PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM playlist_contains_songs WHERE spotify_uri = ?");
+	        deleteStatement.setString(1, toDelete);
+	        deleteStatement.execute();
 		    
 	        ResultSet rs3=findNumSongs.executeQuery();
 	        
@@ -107,11 +106,13 @@ public class editor extends HttpServlet {
 			
 		    Connection con = databaseconnection.getConnection();
 	        
-		    String addStatement = "INSERT INTO playlist_contains_songs (playlist_id, spotify_uri) VALUES (" + playlistID + ", " + "'" + toAdd + "')";
-		    PreparedStatement sqlAdd = con.prepareStatement(addStatement);
+		    PreparedStatement addStatement = con.prepareStatement("INSERT INTO playlist_contains_songs (playlist_id, spotify_uri) VALUES (?, ?)");
+		    
+		    addStatement.setString(1, playlistID);
+		    addStatement.setString(2, toAdd);
 		    
 		    // Execute
-		    int rowsInserted = sqlAdd.executeUpdate();
+		    int rowsInserted = addStatement.executeUpdate();
 
 		    if (rowsInserted > 0) {
 		    	
