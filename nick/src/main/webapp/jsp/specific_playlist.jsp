@@ -76,7 +76,7 @@ h1 {
 	</ul>                            
 
 	<div class="button-container">
-		<form id="form1" action="../start_session_server" method="get">
+		<form id="form1" action="start_session_server" method="get">
         	<button type="start_listening" >Start Listening</button>
     	</form>
     	<form id="form2" action="../return_to_home_server" method="get">

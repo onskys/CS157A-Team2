@@ -31,7 +31,7 @@ public class specific_playlist_server extends HttpServlet {
     	  Connection con = databaseconnection.getConnection();
           System.out.println(" database connection successfully opened.<br/><br/>");
           PreparedStatement ps = con.prepareStatement("SELECT name FROM playlist WHERE playlist_id=?");
-          System.out.println("this is selected playlist" + session.getAttribute("selectedPlaylistID"));
+          System.out.println("this is selected playlist: " + session.getAttribute("selectedPlaylistID"));
           ps.setString(1,(String) session.getAttribute("selectedPlaylistID"));
           ResultSet rs=ps.executeQuery();
           if(rs.next()) {

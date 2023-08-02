@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ page import="userlogin.Song"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,23 +42,36 @@
 <!-- <link rel="stylesheet" type="text/css" href="css/session_page.css" /> -->
 </head>
 <body>
-	<h2>Add Playlist Name</h2>
+	<%
+	session = request.getSession();
+	Song suggested_song = (Song) session.getAttribute("suggested_song");
+	String temp_song_name = suggested_song.getName();
+	String temp_song_artist = suggested_song.getArtist();
+	String temp_song_src = suggested_song.getSrc();
+	%> 
+	<h2>src: <%=temp_song_src %></h2>
+	<h2>Listening to playlist: ${sessionScope.selectedPlaylistName}</h2>
 	<br>
 	<div class="song-details">
-		<span class="song-name">Add name here</span> <br> <span
-			class="song-artist">Add Artist here</span>
+		<span class="song-name">Song Name: <%=temp_song_name%></span> <br> 
+		<span class="song-artist">Song Artist: <%=temp_song_artist%></span>
 	</div>
 
 	<div class="song_progress">
 		<audio id="audio_element">
-			<source src="../music/The Piano Guys/04 Beethoven's 5 Secrets.mp3" type="audio/mp3">
+			<source src="<%=temp_song_src %>" type="audio/mp3">
 		</audio>
 	</div>
 
 	<div class="controls">
 		<button type="button" id="playback_button">Play</button>
-		<button type="button">Next</button>
-		<button type="button">Home</button>
+		<form id="next_button_form" action="../next_song_server" method="get">
+			<input type="hidden" id="songDurationInput" name="duration" value="">
+			<button type="submit" onclick="getSongDuration();">Next</button>
+		</form>
+		<form id="home_button_form" action="../delete_session_server" method="get">
+			<button type="submit">Home</button>
+		</form>
 	</div>
 	<div class="time_display">
 		<span>0:00</span> <span>add total duration</span>
@@ -68,6 +82,17 @@
 		const audioPlayer = document.getElementById("audio_element");
 		const songProgress = document.querySelector(".song_progress");
 
+		
+	    function getSongDuration() {
+	        var audioElement = document.getElementById("audio_element");
+	        var songCurrentTime = audioElement.currentTime; // Duration in seconds
+	        //console.log(typeof songDuration);
+	        //console.log("song duration: ", songDuration);
+	        // Set the song duration in the hidden input field
+	        var songDurationInput = document.getElementById("songDurationInput");
+	        songDurationInput.value = songCurrentTime;
+	    }
+		
 		playButton.addEventListener("click", function() {
 			console.log("in click listener");
 			//process.stderr.write("in timeupdate event listener");
