@@ -123,9 +123,14 @@ h1 {
                 %>
             </select>
         	<button type="edit">MAKE EDIT</button>
-        	
-        	
         </div>
     </form>
+    <button type="home" onClick="returnHome()">BACK TO PLAYLIST</button>
+    
+    <script>
+    function returnHome() {
+    	window.location.href = '../jsp/specific_playlist.jsp'
+    }
+    </script>
 </body>
 </html>
