@@ -76,20 +76,23 @@ h1 {
 	</ul>                            
 
 	<div class="button-container">
-		<form id="form1" action="../start_session_server" method="get">
+		<form id="form1" action="start_session_server" method="get">
         	<button type="start_listening" >Start Listening</button>
-    	</form>
-    	<form id="form2" action="../return_to_home_server" method="get">
-        	<button type="back_to_home" >Back to Home</button>
     	</form>
 	</div>
 	
 	<a href="#" class="button" onclick="goToEditPage()">Edit Playlist</a>
-
+	
+	<a href="#" class="button" onclick="returnHome()">Home</a>
+	
 
 	<script>
 		function goToEditPage() {
 			window.location.href='../cs157a_team2/jsp/edit.jsp'
+		}
+		
+		function returnHome() {
+			window.location.href = '../cs157a_team2/jsp/home_screen.jsp'
 		}
 	</script>
 </body>

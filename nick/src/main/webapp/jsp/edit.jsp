@@ -52,7 +52,6 @@ h1 {
 		try{
 			Connection con = databaseconnection.getConnection();
         	PreparedStatement ps = con.prepareStatement("SELECT name, artist FROM playlist_contains_songs JOIN song ON playlist_contains_songs.spotify_uri = song.spotify_uri WHERE playlist_id =?");
-        	//System.out.println("this is selected playlist" + session.getAttribute("selectedPlaylistID"));
         	ps.setString(1,(String) session.getAttribute("selectedPlaylistID"));
         	ResultSet rs=ps.executeQuery();
         	while (rs.next()) {
@@ -79,12 +78,6 @@ h1 {
              	  <option>Delete Song:</option>
               	  <% 
                 	    try {
-                        /* java.sql.Connection con;
-                        Class.forName("com.mysql.jdbc.Driver");
-                        String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
-                        String dbUser = "root";
-                        String dbPassword = "Shroot123@";
-                        con = DriverManager.getConnection(dbURL, dbUser, dbPassword); */
                         Connection con = databaseconnection.getConnection();
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT song.name, playlist_contains_songs.spotify_uri FROM song JOIN playlist_contains_songs ON song.spotify_uri = playlist_contains_songs.spotify_uri WHERE playlist_id = "  + (String) session.getAttribute("selectedPlaylistID"));
@@ -110,12 +103,6 @@ h1 {
         		<option>Add Song:</option>
         		<% 
                 	    try {
-                        /* java.sql.Connection con;
-                        Class.forName("com.mysql.jdbc.Driver");
-                        String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
-                        String dbUser = "root";
-                        String dbPassword = "Shroot123@";
-                        con = DriverManager.getConnection(dbURL, dbUser, dbPassword); */
                         Connection con = databaseconnection.getConnection();
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT song.name, song.spotify_uri FROM song");
@@ -136,9 +123,14 @@ h1 {
                 %>
             </select>
         	<button type="edit">MAKE EDIT</button>
-        	
-        	
         </div>
     </form>
+    <button type="home" onClick="returnHome()">BACK TO PLAYLIST</button>
+    
+    <script>
+    function returnHome() {
+    	window.location.href = '../jsp/specific_playlist.jsp'
+    }
+    </script>
 </body>
 </html>
