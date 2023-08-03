@@ -28,14 +28,19 @@ public class auth_server extends HttpServlet {
 
       String user_username = request.getParameter("Uname");
       String user_password = request.getParameter("Pass");
+      String labelValue = request.getParameter("admincheck");
+      out.println("here");
+      out.println(labelValue);
       try {
               
          
          Connection con = databaseconnection.getConnection();
-         out.println(" database successfully opened.<br/><br/>");
-         // Statement stmt = con.createStatement();
-         // ResultSet rs = stmt.executeQuery("SELECT * FROM Listener WHERE username='" + user_username + "' AND password='" + user_password);
-         PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE BINARY username=? and BINARY password=?");  
+         PreparedStatement ps;
+         if(labelValue != null) {
+        	 ps = con.prepareStatement("SELECT * FROM Admin WHERE BINARY username=? and BINARY user_password=?");  
+         } else {
+        	 ps = con.prepareStatement("SELECT * FROM User WHERE BINARY username=? and BINARY user_password=?");  
+         }
          ps.setString(1,user_username);  
          ps.setString(2,user_password);  
                
@@ -50,19 +55,29 @@ public class auth_server extends HttpServlet {
       
       
 
-      if (isValid) {
-         // Redirect to the home page or perform other actions for successful login
-    	 HttpSession session = request.getSession(); // 'request' is the HttpServletRequest object
-     	 session.setAttribute("username", user_username);
-         out.println("is valid");
-         response.sendRedirect("jsp/home_screen.jsp");
-      } else {
-         // Password is incorrect
-         out.println("is not valid");
-         request.setAttribute("errorMessage", "Incorrect password. Please try again.");
-         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/index.jsp");
-         dispatcher.forward(request, response);
-      }
+         if (isValid) {
+       	  if(labelValue != null) {
+       		  response.sendRedirect("jsp/adminhome.jsp"); 
+             } else {
+           	  response.sendRedirect("jsp/music.jsp"); 
+             }
+            
+            
+         
+         } else {
+            // Password or Username is incorrect
+       	  if(labelValue != null) {
+       		String errorMessage = "Incorrect password. Please try again.";
+       		request.getSession().setAttribute("errormess", errorMessage);
+       		response.sendRedirect(request.getContextPath() + "/jsp/adminlogin.jsp");
+       		  
+             } else {
+            	 String errorMessage = "Incorrect password. Please try again.";
+            	 request.getSession().setAttribute("errorMessage", errorMessage);
+//            	 response.sendRedirect(request.getContextPath() + "/jsp/index.jsp");
+            	 response.sendRedirect(request.getContextPath() + "/");
+             }
+         }
       } catch(Exception e) {
     	  System.out.println(e);
          out.println("SQLException caught: " + e.getMessage());

@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Shuffle Bud</title>   
+    <link rel="stylesheet" type="text/css" href="/cs157a_team2/css/index.css" />
 </head>
 <body>
     <h2>Shuffle Buddy</h2><br>

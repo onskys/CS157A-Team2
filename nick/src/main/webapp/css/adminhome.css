@@ -1,0 +1,56 @@
+/* Apply styles to the entire body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #454545;
+    margin: 0;
+    padding: 0;
+    height:100vh;
+}
+
+/* Style the header */
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #454545;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    height:100vh;
+}
+
+.headers {
+  margin: 0px;
+  font-size: 60px;
+  text-align: left;
+}
+
+/* Style the buttons container */
+.buttons-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: space-around;
+    width: 30%;
+}
+
+/* Style the action buttons */
+.action-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1; /* Added to make all buttons take equal space */
+}
+
+/* Make the buttons look more interactive when hovered */
+.action-button:hover {
+    background-color: #0056b3;
+}
