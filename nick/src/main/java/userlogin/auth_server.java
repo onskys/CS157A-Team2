@@ -29,6 +29,9 @@ public class auth_server extends HttpServlet {
       String user_username = request.getParameter("Uname");
       String user_password = request.getParameter("Pass");
       String labelValue = request.getParameter("admincheck");
+      
+ 	 request.getSession().setAttribute("username", user_username);
+      
       out.println("here");
       out.println(labelValue);
       try {
@@ -37,9 +40,9 @@ public class auth_server extends HttpServlet {
          Connection con = databaseconnection.getConnection();
          PreparedStatement ps;
          if(labelValue != null) {
-        	 ps = con.prepareStatement("SELECT * FROM Admin WHERE BINARY username=? and BINARY user_password=?");  
+        	 ps = con.prepareStatement("SELECT * FROM Admin WHERE BINARY username=? and BINARY password=?");  
          } else {
-        	 ps = con.prepareStatement("SELECT * FROM User WHERE BINARY username=? and BINARY user_password=?");  
+        	 ps = con.prepareStatement("SELECT * FROM User WHERE BINARY username=? and BINARY password=?");  
          }
          ps.setString(1,user_username);  
          ps.setString(2,user_password);  
@@ -59,7 +62,7 @@ public class auth_server extends HttpServlet {
        	  if(labelValue != null) {
        		  response.sendRedirect("jsp/adminhome.jsp"); 
              } else {
-           	  response.sendRedirect("jsp/music.jsp"); 
+           	  response.sendRedirect("jsp/home_screen.jsp"); 
              }
             
             
