@@ -13,7 +13,7 @@
     <div class="buttons-container">
             <button type='button' class="action-button" onclick="window.location.href='deleteuser.jsp'"> Delete User </button>
             <button type='button' class="action-button" onclick="window.location.href='securityQuestion.jsp'">Security Question</button>
-            <button type='button' class="action-button" onclick="window.location.href='defaultplaylist.jsp'">Default Playlist</button>
+            <button type='button' class="action-button" onclick="window.location.href='default_playlist.jsp'">Default Playlist</button>
 
     </div>
      </header>

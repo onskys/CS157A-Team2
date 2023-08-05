@@ -22,7 +22,7 @@ const scrollRight = document.querySelector(".scroll-right");
 const albumTitleSpan = document.querySelector(".album-title");
 const albumNum = document.querySelector(".album-num");
 const spotifyWidget = document.querySelector(".spotify-widget iframe");
-console.log("------------------------------------------------------------------------------------");
+
 let index = 0;
 
 scrollLeft.addEventListener("click", () => handleClickScroll(-1));

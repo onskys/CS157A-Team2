@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Shuffle Bud</title>   
+    <title>Shuffle Buddy</title>   
     <link rel="stylesheet" type="text/css" href="/cs157a_team2/css/index.css" />
 </head>
 <body>

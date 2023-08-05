@@ -25,6 +25,8 @@ h1 {
 
 .button-container {
 	text-align: center;
+	align-items: center;
+	
 }
 
 .button {
@@ -34,6 +36,7 @@ h1 {
 	color: white;
 	text-decoration: none;
 	border-radius: 4px;
+	align-items: center;
 	cursor: pointer;
 	margin: 10px;
 }
