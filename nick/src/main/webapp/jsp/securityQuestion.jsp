@@ -14,7 +14,7 @@
     <h1>Existing Security Questions</h1>
     <button type='button' class="back-button" onclick="window.location.href='adminhome.jsp'"">Back</button>
     <form action="../SecurityQuestionServlet" method="post">
-        <input type="text" id="question-text" name = "question-text" placeholder="New Security Question" required>
+        
         <select id="user-list" name="user-list" multiple>
             <%
                 try {
@@ -35,6 +35,7 @@
                 }
             %>
         </select>
+        <input type="text" id="question-text" name = "question-text" placeholder="New Security Question" required>
         <input type="submit" id="delete-button" value="Add">
     </form>
 
