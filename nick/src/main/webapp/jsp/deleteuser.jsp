@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Select Users to Delete</h1>
-    <button type='button' class="back-button" onclick="window.location.href='adminhome.jsp'"">Back</button>
+    <button type='button' class="back-button" onclick="window.location.href='adminhome.jsp'">Back</button>
     <form action="../DeleteUserServlet" method="post">
         <input type="text" id="search-box" placeholder="Search for users">
         <select id="user-list" name="user-list" multiple required>
