@@ -7,6 +7,22 @@
 <meta charset="ISO-8859-1">
 <title>Shuffle Buddy</title>
 <style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+	background-color: #f2f2f2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+h1 {
+	text-align: center;
+}
+
 .song_progress {
 	position: absolute;
 	top: 0;
@@ -18,10 +34,14 @@
 }
 
 .time_display {
-	width: 100%;
+	width: 30%;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
+}
+
+.button-container {
+	text-align: center;
 }
 
 .button {
@@ -49,8 +69,8 @@
 	String temp_song_artist = suggested_song.getArtist();
 	String temp_song_src = suggested_song.getSrc();
 	%> 
-	<h2>src: <%=temp_song_src %></h2>
-	<h2>Listening to playlist: ${sessionScope.selectedPlaylistName}</h2>
+	<%-- <h2>src: <%=temp_song_src %></h2> --%>
+	<h1>Listening to playlist: ${sessionScope.selectedPlaylistName}</h1>
 	<br>
 	<div class="song-details">
 		<span class="song-name">Song Name: <%=temp_song_name%></span> <br> 
@@ -62,20 +82,21 @@
 			<source src="<%=temp_song_src %>" type="audio/mp3">
 		</audio>
 	</div>
+	<div class="time_display">
+		<span>0:00</span> <span>0:00</span>
+	</div>
 
-	<div class="controls">
-		<button type="button" id="playback_button">Play</button>
+	<div class="button-container">
+		<button href="#" class="button" type="button" id="playback_button">Play</button>
 		<form id="next_button_form" action="../next_song_server" method="get">
 			<input type="hidden" id="songDurationInput" name="duration" value="">
-			<button type="submit" onclick="getSongDuration();">Next</button>
+			<button href="#" class="button" type="submit" onclick="getSongDuration();">Next</button>
 		</form>
 		<form id="home_button_form" action="../delete_session_server" method="get">
-			<button type="submit">Home</button>
+			<button href="#" class="button" type="submit">Home</button>
 		</form>
 	</div>
-	<div class="time_display">
-		<span>0:00</span> <span>add total duration</span>
-	</div>
+	
 
 	<script>
 		const playButton = document.getElementById("playback_button");
