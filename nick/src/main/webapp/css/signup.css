@@ -19,11 +19,13 @@ form {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin: 20px 10px;
+  width: 90%;
 }
 
 label {
   display: block;
+  width: 40%;
   font-weight: bold;
 }
 
