@@ -44,16 +44,24 @@ public class DeleteUserServlet extends HttpServlet {
 	            Connection con = databaseconnection.getConnection();
 
 	            // Use a prepared statement to avoid SQL injection
-	            String sql = "DELETE FROM user WHERE username = ?";
-	            PreparedStatement pstmt = con.prepareStatement(sql);
+	            String userDeleteSql = "DELETE FROM user WHERE username = ?";
+	            String createdDeleteSql = "DELETE FROM created WHERE username = ?";
+	            
+	            PreparedStatement userDeleteStmt = con.prepareStatement(userDeleteSql);
+	            PreparedStatement createdDeleteStmt = con.prepareStatement(createdDeleteSql);
+	            
 
-	            // Loop through the selected users and execute the delete query for each username
+	            // Looping through the selected users
 	            for (String selectedUser : selectedUsers) {
-	                pstmt.setString(1, selectedUser);
-	                pstmt.executeUpdate();
+	            	userDeleteStmt.setString(1, selectedUser);
+	            	userDeleteStmt.executeUpdate();
+	            	createdDeleteStmt.setString(1, selectedUser);
+	            	createdDeleteStmt.executeUpdate();
+	                
 	            }
 
-	            pstmt.close();
+	            createdDeleteStmt.close();
+	            userDeleteStmt.close();
 	            con.close();
 
 	            
