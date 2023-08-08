@@ -49,11 +49,10 @@ public class reset_password_servlet extends HttpServlet {
 	        if (rs.next()) {
 	            securityQuestion = rs.getString("question_text");
 	            // Store the security question and username in request attributes
-	            request.setAttribute("securityQuestion", securityQuestion);
-	            request.setAttribute("username", username);
+	            
 
 	            // Forward the request to the reset_password.jsp page
-	            request.getRequestDispatcher("/jsp/forgotpass.jsp").forward(request, response);
+	            response.sendRedirect(request.getContextPath() + "/jsp/forgotpass.jsp?securityQuestion=" + securityQuestion + "&username=" + username);
 	        } else {
 	            // If the username is not found, show an error message
 	        	response.sendRedirect(request.getContextPath() + "/jsp/forgotpass.jsp?resetStatus=Invalid+username");
