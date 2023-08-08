@@ -54,10 +54,19 @@ public class add_playlist extends HttpServlet {
 	        String createDate = localDate.format(formatter);
 	        System.out.println(createDate);
 	        
-	        PreparedStatement playlistInsert = con.prepareStatement("INSERT INTO playlist (playlist_id, name, created_date) VALUES (" + newID + ", '" + playlistName + "', '" + createDate + "')");
+	        PreparedStatement playlistInsert = con.prepareStatement("INSERT INTO playlist (playlist_id, name, created_date) VALUES (?, ?, ?)");
+	        
+		    playlistInsert.setInt(1, newID);
+		    playlistInsert.setString(2, playlistName);
+		    playlistInsert.setString(3, createDate);
+
 	        playlistInsert.execute();
 	        
-	        PreparedStatement createdInsert = con.prepareStatement("INSERT INTO created (username, playlist_id) VALUES ('" + username + "', " + newID + ")");
+	        PreparedStatement createdInsert = con.prepareStatement("INSERT INTO created (username, playlist_id) VALUES (?, ?)");
+	        
+	        createdInsert.setString(1, username);
+		    createdInsert.setInt(2, newID);
+	        
 	        createdInsert.execute();
 	        
 	        System.out.println("Playlist added successfully.");

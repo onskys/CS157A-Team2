@@ -64,6 +64,15 @@ public class newuserdata extends HttpServlet {
 
 		    // Execute the SQL statement
 		    int rowsInserted = statement.executeUpdate();
+		    
+		    // Adding default playlist to new user
+		    PreparedStatement addDefault = con.prepareStatement("INSERT INTO created (username, playlist_id) VALUES (?, 1)");
+		    addDefault.setString(1,  username);
+		    addDefault.execute();
+
+		    // Clean up resources
+		    statement.close();
+		    con.close();
 
 		    if (rowsInserted > 0) {
 		    	
@@ -74,13 +83,7 @@ public class newuserdata extends HttpServlet {
 		        
 		    } else {
 		        out.println("Failed to insert user data.");
-		    }
-
-		    // Clean up resources
-		    statement.close();
-		    con.close();
-			
-			
+		    }	
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

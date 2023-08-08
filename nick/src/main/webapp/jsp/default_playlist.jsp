@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Playlist Editor</title>
+<title>Default Playlist</title>
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -45,14 +45,13 @@ h1 {
 </head>
 
 <body>
-	<h1>Playlist Editor</h1>
-	<p>Edit your playlist by deleting or adding songs.</p>
+	<h1>Default Playlist Editor For Admins</h1>
+	<p>Update the default playlist for all users.</p>
 	<ul>
 		<%
 		try{
 			Connection con = databaseconnection.getConnection();
-        	PreparedStatement ps = con.prepareStatement("SELECT name, artist FROM playlist_contains_songs JOIN song ON playlist_contains_songs.spotify_uri = song.spotify_uri WHERE playlist_id =?");
-        	ps.setString(1,(String) session.getAttribute("selectedPlaylistID"));
+        	PreparedStatement ps = con.prepareStatement("SELECT name, artist FROM default_playlist JOIN song ON default_playlist.spotify_uri = song.spotify_uri");
         	ResultSet rs=ps.executeQuery();
         	while (rs.next()) {
 				String song_name = rs.getString("name");
@@ -70,9 +69,8 @@ h1 {
         }
     %>
 	</ul>                            
-    <form id="edit-form" action="../editor" method="POST">
+    <form id="edit-form" action="../default_editor" method="POST">
 		<div class="form-group">
-			 <input type="hidden" value=${sessionScope.selectedPlaylistID} name="playlist-id" />
            	 <label for="delete-song">Delete Song:</label>
 			 <select id="delete-song" name="delete-song">
              	  <option>Delete Song:</option>
@@ -80,7 +78,7 @@ h1 {
                 	    try {
                         Connection con = databaseconnection.getConnection();
                         Statement stmt = con.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT song.name, playlist_contains_songs.spotify_uri FROM song JOIN playlist_contains_songs ON song.spotify_uri = playlist_contains_songs.spotify_uri WHERE playlist_id = "  + (String) session.getAttribute("selectedPlaylistID"));
+                        ResultSet rs = stmt.executeQuery("SELECT song.name, default_playlist.spotify_uri FROM song JOIN default_playlist ON song.spotify_uri = default_playlist.spotify_uri");
                         
                         while (rs.next()) {
                             String songName = rs.getString("name");
@@ -125,11 +123,11 @@ h1 {
         	<button type="edit">MAKE EDIT</button>
         </div>
     </form>
-    <button type="home" onClick="returnHome()">BACK TO HOME</button>
+    <button type="home" onClick="returnHome()">BACK TO ADMIN PAGE</button>
     
     <script>
     function returnHome() {
-    	window.location.href = '../jsp/home_screen.jsp'
+    	window.location.href = '../jsp/adminhome.jsp'
     }
     </script>
 </body>

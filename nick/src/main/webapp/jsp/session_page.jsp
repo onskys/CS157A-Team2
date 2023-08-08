@@ -29,8 +29,8 @@ h1 {
 	left: 0;
 	width: 0;
 	height: 100%;
-/* 	background: linear-gradient(to right, #3baa7b, #62bc68);
-	border-radius: 0.5rem; */
+	background: linear-gradient(to right, #3baa7b, #62bc68);
+	border-radius: 0.5rem;
 }
 
 .time_display {
