@@ -43,7 +43,7 @@ h1 {
 	margin-right: auto;
 }
 
-.button-container {
+/* .button-container {
 	text-align: center;
 }
 
@@ -56,7 +56,7 @@ h1 {
 	align: center;
 	border-radius: 4px;
 	cursor: pointer;
-	margin: 10px;
+	margin: 10px; */
 }
 
 .h2 {
@@ -69,7 +69,7 @@ h1 {
 
 button[type="button"] {
   display: block;
-  width: 20%;
+  width: 100%;
   padding: 10px;
   align-item: center;
   background-color: #4caf50;
@@ -85,7 +85,7 @@ button[type="button"] {
 
 button[type="submit"] {
   display: block;
-  width: 20%;
+  width: 100%;
   padding: 10px;
   align-item: center;
   background-color: #4caf50;
@@ -141,9 +141,6 @@ button[type="submit"] {
 		</form>
 	</div>
 
-	<div class="time_display">
-		<span>0:00</span> <span>----</span>
-	</div>
 
 	<script>
 		const playButton = document.getElementById("playback_button");
