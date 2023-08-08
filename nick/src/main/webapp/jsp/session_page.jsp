@@ -71,6 +71,8 @@ button[type="button"] {
   display: block;
   width: 100%;
   padding: 10px;
+  height: 40px;
+  width: 80px;
   align-item: center;
   background-color: #4caf50;
   margin-bottom: 20px;
@@ -87,6 +89,8 @@ button[type="submit"] {
   display: block;
   width: 100%;
   padding: 10px;
+  height: 40px;
+  width: 80px;
   align-item: center;
   background-color: #4caf50;
   margin-bottom: 20px;
