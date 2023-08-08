@@ -59,10 +59,10 @@ public class populate_session_server extends HttpServlet {
 				played_songs.add(tempSong);
 			}
 
-			System.out.println("these are all the songs that have already been played this session: ");
-			for (Song song : played_songs) {
-				song.print();
-			}
+//			System.out.println("these are all the songs that have already been played this session: ");
+//			for (Song song : played_songs) {
+//				song.print();
+//			}
 
 			// make a list of all the songs in the playlist that have not been played
 			// already
@@ -94,10 +94,10 @@ public class populate_session_server extends HttpServlet {
 				unplayed_songs.add(tempSong);
 			}
 
-			System.out.println("These are all the songs that have not been played this session");
-			for (Song song : unplayed_songs) {
-				song.print();
-			}
+//			System.out.println("These are all the songs that have not been played this session");
+//			for (Song song : unplayed_songs) {
+//				song.print();
+//			}
 
 			System.out.println("size of played songs: " + played_songs.size());
 			System.out.println("size of unplayed songs: " + unplayed_songs.size());
@@ -143,18 +143,30 @@ public class populate_session_server extends HttpServlet {
 					average_song_characteristics[i] = average_song_characteristics[i] / played_songs.size();
 				}
 				
+				System.out.print("average song characteristics: ");
+				for(int i = 0; i < 5; i++) {
+					System.out.print(Float.toString(average_song_characteristics[i]) + ", ");
+				} System.out.println();
+				
 				// iterate through the array of songs that have not been played yet and save the song with the lowest euclidian distance from the the
 				// average song characteristics vector
 				float best_distance = Float.MAX_VALUE;
 				Song best_suggestion = null;
 				
+//				System.out.println("====================\nThese are the scores of the unplayed songs: ");
+				
 				for(Song song : unplayed_songs) {
 					float[] temp_song_vector = {song.getAcousticness(), song.getDanceability(), song.getEnergy(), song.getInstrumentalness(), song.getValence()};
 					float temp_distance = Song.euclidian_distance(average_song_characteristics, temp_song_vector);
+//					System.out.println(song.getName() + ": " + Float.toString(temp_distance));
 					if (temp_distance < best_distance) {
+//						System.out.println("updating best song, original best_distace: " + Float.toString(best_distance) + " new best distance: " + Float.toString(temp_distance));
 						best_suggestion = song;
+						best_distance = temp_distance;
 					}
 				}
+				System.out.println("This will be the new suggested song: " + best_suggestion.getName());
+				System.out.println("with score: " + Float.toString(best_distance));
 				session.setAttribute("suggested_song", best_suggestion);
 				//request.setAttribute("suggested_song", best_suggestion);
 				
