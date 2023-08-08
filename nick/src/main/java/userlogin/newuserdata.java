@@ -65,9 +65,27 @@ public class newuserdata extends HttpServlet {
 		    // Execute the SQL statement
 		    int rowsInserted = statement.executeUpdate();
 		    
-		    // Adding default playlist to new user
-		    PreparedStatement addDefault = con.prepareStatement("INSERT INTO created (username, playlist_id) VALUES (?, 1)");
+		    //create copy of default playlist for new user
+		    PreparedStatement copy_default_playlist = con.prepareStatement("INSERT INTO playlist (name, created_date) VALUES (?, NOW())", PreparedStatement.RETURN_GENERATED_KEYS);
+		    copy_default_playlist.setString(1, "default_copy_for_" + firstname);
+		    copy_default_playlist.execute();
+		    int generatedID = -1;
+	        ResultSet generatedKeys = copy_default_playlist.getGeneratedKeys();
+	        if (generatedKeys.next()) {
+	        	generatedID = generatedKeys.getInt(1);
+	        } else {
+	        	System.out.println("failed to return generated playlist_id in newuserdate server");
+	        }
+	        
+	        //copy songs from default playlist to playlist contains songs
+	        PreparedStatement copy_default_playlist_songs = con.prepareStatement("INSERT INTO playlist_contains_songs SELECT ?, d.spotify_uri FROM default_playlist d");
+	        copy_default_playlist_songs.setString(1, Integer.toString(generatedID));
+	        copy_default_playlist_songs.execute();
+		    
+		    // Adding default playlist to new user created
+		    PreparedStatement addDefault = con.prepareStatement("INSERT INTO created (username, playlist_id) VALUES (?, ?)");
 		    addDefault.setString(1,  username);
+		    addDefault.setString(2, Integer.toString(generatedID));
 		    addDefault.execute();
 
 		    // Clean up resources
