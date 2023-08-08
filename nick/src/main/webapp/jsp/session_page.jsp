@@ -10,7 +10,7 @@
 .song_progress {
 	position: absolute;
 	top: 0;
-	left: 0;
+    left: 0;
 	width: 0;
 	height: 100%;
 	background: linear-gradient(to right, #3baa7b, #62bc68);
@@ -18,10 +18,13 @@
 }
 
 .time_display {
-	width: 100%;
+	width: 20%;
+	text-align: center;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .button {
@@ -30,9 +33,49 @@
 	background-color: #4CAF50;
 	color: white;
 	text-decoration: none;
+	align: center;
 	border-radius: 4px;
 	cursor: pointer;
 	margin: 10px;
+}
+
+.h2 {
+	text-align: center;
+}
+
+.song-details {
+	text-align: center;
+}
+
+button[type="button"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -49,8 +92,8 @@
 	String temp_song_artist = suggested_song.getArtist();
 	String temp_song_src = suggested_song.getSrc();
 	%> 
-	<h2>src: <%=temp_song_src %></h2>
-	<h2>Listening to playlist: ${sessionScope.selectedPlaylistName}</h2>
+	<!--  <h2 style="text-align: center;">Song Source: </h2> -->
+	<h2 style="text-align: center;">Listening to playlist: ${sessionScope.selectedPlaylistName}</h2>
 	<br>
 	<div class="song-details">
 		<span class="song-name">Song Name: <%=temp_song_name%></span> <br> 
@@ -74,7 +117,7 @@
 		</form>
 	</div>
 	<div class="time_display">
-		<span>0:00</span> <span>add total duration</span>
+		<span>0:00</span> <span>----</span>
 	</div>
 
 	<script>
@@ -99,9 +142,11 @@
 			if (audioPlayer.paused) {
 				audioPlayer.play();
 				playButton.textContent = "Pause";
+				document.getElementById("playback_button").style.backgroundColor = 'red';
 			} else {
 				audioPlayer.pause();
 				playButton.textContent = "Play";
+				document.getElementById("playback_button").style.backgroundColor = '#4CAF50';
 			}
 		});
 		

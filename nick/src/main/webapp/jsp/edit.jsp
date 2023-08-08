@@ -27,15 +27,31 @@ h1 {
 	text-align: center;
 }
 
-.button {
-	display: inline-block;
-	padding: 10px 20px;
-	background-color: #4CAF50;
-	color: white;
-	text-decoration: none;
-	border-radius: 4px;
-	cursor: pointer;
-	margin: 10px;
+button[type="home"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="edit"] {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  background-color: #4caf50;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -98,7 +114,7 @@ h1 {
                     }
                 %>
             </select>
-        	<label for="add-song">Add Song:</label>
+            <label for="add-song">Add Song:</label>
         	<select id="add-song" name="add-song">
         		<option>Add Song:</option>
         		<% 
@@ -122,7 +138,7 @@ h1 {
                     }
                 %>
             </select>
-        	<button type="edit">MAKE EDIT</button>
+        	<div><button type="edit">MAKE EDIT</button></div>
         </div>
     </form>
     <button type="home" onClick="returnHome()">BACK TO HOME</button>

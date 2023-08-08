@@ -17,7 +17,7 @@
             <input type="password" name="Pass" id="Pass" class="input-uname-password" placeholder="Password">
             <button type="submit" name="log" id="log">Sign In</button>
             <input type="hidden" value="admincheck" name="admincheck" />
-            <% String errorMessage = (String) session.getAttribute("errormess");
+            <% String errorMessage = (String) request.getAttribute("errormess");
 	        if (errorMessage != null) { %>
 	          <p><%= errorMessage %></p>
               

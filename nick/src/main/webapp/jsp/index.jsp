@@ -9,7 +9,7 @@
 <body>
     <h2>Shuffle Buddy</h2><br>
     <div class="login">
-        <form id="login" action="auth_server" method="GET" >
+        <form id="login" action="../auth_server" method="GET" >
         	<%-- Taking user information for username and password. --%>
             <label for="Uname" class="form-label">User Name</label>
             <input type="text" name="Uname" id="Uname" class="input-uname-password" placeholder="Username">

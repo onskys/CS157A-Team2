@@ -35,10 +35,23 @@ h1 {
 	background-color: #4CAF50;
 	color: white;
 	text-decoration: none;
+	margin-bottom: 15px;
 	border-radius: 4px;
 	align-items: center;
 	cursor: pointer;
 	margin: 10px;
+}
+
+button[type="start_listening"] {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .button:hover {

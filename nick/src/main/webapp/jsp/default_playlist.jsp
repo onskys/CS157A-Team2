@@ -38,6 +38,33 @@ h1 {
 	margin: 10px;
 }
 
+button[type="home"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="edit"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  background-color: #4caf50;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
 .button:hover {
 	background-color: #45a049;
 }
@@ -71,6 +98,7 @@ h1 {
 	</ul>                            
     <form id="edit-form" action="../default_editor" method="POST">
 		<div class="form-group">
+		     <input type="hidden" value=${sessionScope.adminName} name="admin-name" />		
            	 <label for="delete-song">Delete Song:</label>
 			 <select id="delete-song" name="delete-song">
              	  <option>Delete Song:</option>
@@ -120,7 +148,7 @@ h1 {
                     }
                 %>
             </select>
-        	<button type="edit">MAKE EDIT</button>
+        	<div><button type="edit">MAKE EDIT</button></div>
         </div>
     </form>
     <button type="home" onClick="returnHome()">BACK TO ADMIN PAGE</button>
