@@ -6,9 +6,11 @@
 </head>
 <body>
     <header>
+    <button type = 'button' class = "back-button" onclick ="window.location.href='index.jsp'" >Log Out</button>
+      <div class = "container">
       <div class = "headers">
         <h1>Admin</h1>
-        <h1> Panel </h2>
+        <h2> Panel </h2>
       </div>
     <div class="buttons-container">
             <button type='button' class="action-button" onclick="window.location.href='deleteuser.jsp'"> Delete User </button>
@@ -16,6 +18,7 @@
             <button type='button' class="action-button" onclick="window.location.href='default_playlist.jsp'">Default Playlist</button>
 
     </div>
+    </div>
      </header>
 </body>
-</html>
+</html> 

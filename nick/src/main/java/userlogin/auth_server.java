@@ -60,6 +60,7 @@ public class auth_server extends HttpServlet {
 
          if (isValid) {
        	  if(labelValue != null) {
+       		  request.getSession().setAttribute("adminName", user_username);
        		  response.sendRedirect("jsp/adminhome.jsp"); 
              } else {
            	  response.sendRedirect("jsp/home_screen.jsp"); 

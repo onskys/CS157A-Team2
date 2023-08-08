@@ -85,7 +85,7 @@ h1 {
 	<div class="button-container">
 		<a href="#" class="button" onclick="createPlaylist()">Create New Playlist</a>
 		<a href="#" class="button" onclick="deletePlaylist()">Delete A Playlist</a>		
-	    <!-- <a href="#" class="button" onclick="goToDefaultPlaylist()">Go To Default Playlist</a> -->
+
 	</div>
 
 	<script>
@@ -108,10 +108,6 @@ h1 {
 		function deletePlaylist() {
 			window.location.href='../jsp/delete_playlist.jsp'
 		}
-		
-		/* function goToDefaultPlaylist() {
-			window.location.href='../jsp/default.jsp'
-		} */
 	</script>
 </body>
 </html>

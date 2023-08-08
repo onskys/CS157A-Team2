@@ -7,23 +7,45 @@ body {
     height:100vh;
 }
 
-/* Style the header */
 header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: #454545;
     color: #fff;
     padding: 20px;
-    text-align: center;
-    height:100vh;
+    text-align: left; 
+    height: 100vh;
 }
 
 .headers {
-  margin: 0px;
-  font-size: 60px;
-  text-align: left;
+    margin: 90px 0;
+    font-size: 60px;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.container {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 100vh;
+}
+
+.back-button {
+	order: -1;
+	align-self: flex-end;
+	border-radius: 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 20px; 
 }
 
 /* Style the buttons container */

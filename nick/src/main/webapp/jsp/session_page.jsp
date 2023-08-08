@@ -26,7 +26,7 @@ h1 {
 .song_progress {
 	position: absolute;
 	top: 0;
-	left: 0;
+    left: 0;
 	width: 0;
 	height: 100%;
 	background: linear-gradient(to right, #3baa7b, #62bc68);
@@ -34,10 +34,13 @@ h1 {
 }
 
 .time_display {
-	width: 30%;
+	width: 20%;
+	text-align: center;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .button-container {
@@ -50,9 +53,49 @@ h1 {
 	background-color: #4CAF50;
 	color: white;
 	text-decoration: none;
+	align: center;
 	border-radius: 4px;
 	cursor: pointer;
 	margin: 10px;
+}
+
+.h2 {
+	text-align: center;
+}
+
+.song-details {
+	text-align: center;
+}
+
+button[type="button"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  align-item: center;
+  background-color: #4caf50;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -69,6 +112,7 @@ h1 {
 	String temp_song_artist = suggested_song.getArtist();
 	String temp_song_src = suggested_song.getSrc();
 	%> 
+
 	<%-- <h2>src: <%=temp_song_src %></h2> --%>
 	<h1>Listening to playlist: ${sessionScope.selectedPlaylistName}</h1>
 	<br>
@@ -96,7 +140,10 @@ h1 {
 			<button href="#" class="button" type="submit">Home</button>
 		</form>
 	</div>
-	
+
+	<div class="time_display">
+		<span>0:00</span> <span>----</span>
+	</div>
 
 	<script>
 		const playButton = document.getElementById("playback_button");
@@ -120,9 +167,11 @@ h1 {
 			if (audioPlayer.paused) {
 				audioPlayer.play();
 				playButton.textContent = "Pause";
+				document.getElementById("playback_button").style.backgroundColor = 'red';
 			} else {
 				audioPlayer.pause();
 				playButton.textContent = "Play";
+				document.getElementById("playback_button").style.backgroundColor = '#4CAF50';
 			}
 		});
 		
