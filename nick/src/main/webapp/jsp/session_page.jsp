@@ -43,11 +43,13 @@ h1 {
 	margin-right: auto;
 }
 
-/* .button-container {
-	text-align: center;
+.button-container {
+	width: 100%;
+	display: flex; /* Use flexbox to arrange items */
+	flex-direction: column; /* Arrange items vertically (column) */
 }
 
-.button {
+/* .button {
 	display: inline-block;
 	padding: 10px 20px;
 	background-color: #4CAF50;
@@ -56,8 +58,8 @@ h1 {
 	align: center;
 	border-radius: 4px;
 	cursor: pointer;
-	margin: 10px; */
-}
+	margin: 10px;
+} */
 
 .h2 {
 	text-align: center;
@@ -69,7 +71,7 @@ h1 {
 
 button[type="button"] {
   display: block;
-  width: 100%;
+  width: 30%;
   padding: 10px;
   align-item: center;
   background-color: #4caf50;
@@ -85,7 +87,7 @@ button[type="button"] {
 
 button[type="submit"] {
   display: block;
-  width: 100%;
+  width: 30%;
   padding: 10px;
   align-item: center;
   background-color: #4caf50;
@@ -127,7 +129,7 @@ button[type="submit"] {
 		</audio>
 	</div>
 	<div class="time_display">
-		<span>0:00</span> <span>0:00</span>
+		<span>0:00</span> <span>--:--</span>
 	</div>
 
 	<div class="button-container">
