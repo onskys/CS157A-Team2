@@ -47,7 +47,7 @@ public class passwordupdate extends HttpServlet {
 
     private String getSecurityQuestion(Connection con, String username) throws SQLException {
         String question = null;
-        String sql = "SELECT question_text FROM security_question WHERE security_id = (Select security_id from users WHERE username = ?)";
+        String sql = "SELECT question_text FROM security_question WHERE security_id = (Select security_id from user WHERE username = ?)";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
@@ -64,8 +64,10 @@ public class passwordupdate extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	String username = request.getParameter("username");
+    	String username = request.getParameter("username1");
     	String newpass = request.getParameter("newPassword");
+    	System.out.println(username);
+    	System.out.println(newpass);
     	try {
     	    Connection con = databaseconnection.getConnection();
     	    String sql = "UPDATE user SET password = ? WHERE username = ?;";
