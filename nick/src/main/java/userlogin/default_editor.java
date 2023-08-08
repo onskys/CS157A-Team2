@@ -25,6 +25,7 @@ public class default_editor extends HttpServlet {
 		
 		String toAdd = request.getParameter("add-song");
 		String toDelete = request.getParameter("delete-song");
+		String adminName = request.getParameter("admin-name");
 				
 		System.out.println("Add request: " + toAdd);
 		System.out.println("Delete request: " + toDelete);
@@ -42,11 +43,11 @@ public class default_editor extends HttpServlet {
 		}
 		
 		else if (!toAdd.equals("Add Song:") && toDelete.equals("Delete Song:")) {
-			add(toAdd);
+			add(toAdd, adminName);
 		}
 		else if (!toAdd.equals("Add Song:") && !toDelete.equals("Delete Song:")) {
 			delete(toDelete);
-			add(toAdd);
+			add(toAdd, adminName);
 		}	
 		try {
 			response.sendRedirect("../cs157a_team2/jsp/default_playlist.jsp");
@@ -63,16 +64,6 @@ public class default_editor extends HttpServlet {
 
 		    Connection con = databaseconnection.getConnection();
 	        
-	        PreparedStatement findNumSongs = con.prepareStatement("SELECT COUNT(spotify_uri) FROM default_playlist");
-	        ResultSet rs2=findNumSongs.executeQuery();
-	        
-	        int numSongsBefore = 0;
-	        
-	        while (rs2.next()) {
-		        numSongsBefore = Integer.parseInt(rs2.getString(1));
-		        break;
-	        }
-	        
 	        PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM default_playlist WHERE spotify_uri = ?");
 	        deleteStatement.setString(1, toDelete);
 	        deleteStatement.execute();
@@ -81,21 +72,7 @@ public class default_editor extends HttpServlet {
 	        deleteStatementContains.setString(1, toDelete);
 	        deleteStatementContains.execute();
 		    
-	        ResultSet rs3=findNumSongs.executeQuery();
-	        
-	        int numSongsAfter = 0;
-	        
-	        while (rs3.next()) {
-		        numSongsAfter = Integer.parseInt(rs3.getString(1));
-		        break;
-	        }
-	        
-	        if (numSongsAfter < numSongsBefore) {
-		        System.out.println("Song deleted successfully.");
-	        }
-	        else {
-	        	System.out.println("Failed to delete song.");
-	        }
+	        System.out.println("Song deleted successfully.");
 	
 		}
 		catch(Exception e) {
@@ -104,34 +81,21 @@ public class default_editor extends HttpServlet {
 	    }
 	}
 	
-	protected void add(String toAdd) {
+	protected void add(String toAdd, String adminName) {
 		try {
 			System.out.println("Adding Song");
 			
 		    Connection con = databaseconnection.getConnection();
-		    
-		    PreparedStatement findNewID = con.prepareStatement("SELECT MAX(song_id) FROM default_playlist");
-		    
-	        ResultSet rs = findNewID.executeQuery();
-	        
-	        int addOneToThisID = 0;
-
-	        while (rs.next()) {
-		        addOneToThisID = Integer.parseInt(rs.getString(1));
-		        break;
-	        }
-	        
-	        int newID = addOneToThisID + 1;
 	        
 	        LocalDate localDate = LocalDate.now();
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        String createDate = localDate.format(formatter);
-	        
-	        PreparedStatement addStatement = con.prepareStatement("INSERT INTO default_playlist (song_id, spotify_uri, add_date) VALUES (?, ?, ?)");
+	        	        
+	        PreparedStatement addStatement = con.prepareStatement("INSERT INTO default_playlist (spotify_uri, add_date, admin_name) VALUES (?, ?, ?)");
 		    
-		    addStatement.setInt(1, newID);
-		    addStatement.setString(2, toAdd);
-		    addStatement.setString(3,  createDate);
+		    addStatement.setString(1, toAdd);
+		    addStatement.setString(2, createDate);
+		    addStatement.setString(3,  adminName);
 		    
 	        PreparedStatement addStatementContains = con.prepareStatement("INSERT INTO playlist_contains_songs (playlist_id, spotify_uri) VALUES (1, ?)");
 		    addStatementContains.setString(1, toAdd);

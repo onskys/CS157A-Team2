@@ -161,13 +161,20 @@ public class populate_session_server extends HttpServlet {
 			}
 			
 			System.out.println("\n===== this is the suggested song =====");
-			((Song)session.getAttribute("suggested_song")).print();
 			
-			System.out.println("about to dispatch to session page jsp");
-			response.sendRedirect("jsp/session_page.jsp");
-			// RequestDispatcher dispatcher =
-			// request.getRequestDispatcher("/populate_session_server");
-			// dispatcher.forward(request, response);
+			if (session.getAttribute("suggested_song") == null) {
+				System.out.println("End of playlist");
+			}
+			else {
+				((Song)session.getAttribute("suggested_song")).print();
+				
+				System.out.println("about to dispatch to session page jsp");
+				response.sendRedirect("jsp/session_page.jsp");
+				// RequestDispatcher dispatcher =
+				// request.getRequestDispatcher("/populate_session_server");
+				// dispatcher.forward(request, response);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -36,7 +36,7 @@ public class specific_playlist_server extends HttpServlet {
           ResultSet rs=ps.executeQuery();
           if(rs.next()) {
         	  String playlist_name = rs.getString("name");
-        	  System.out.println("polaylist name: " + playlist_name);
+        	  System.out.println("playlist name: " + playlist_name);
         	  session.setAttribute("selectedPlaylistName", playlist_name);
           }
       } catch (SQLException e) {

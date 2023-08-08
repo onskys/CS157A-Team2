@@ -44,6 +44,11 @@ public class remove_playlist extends HttpServlet {
 	        
 	        deleteCreated.execute();
 	        
+	        PreparedStatement deleteContains = con.prepareStatement("DELETE FROM playlist_contains_songs WHERE playlist_id = ?");
+	        deleteContains.setString(1, playlistToRemove);
+	        
+	        deleteContains.execute();
+	        
 	        System.out.println("Playlist deleted successfully.");
 	        
 	        request.setAttribute("successMessage", "Playlist deleted!");
