@@ -6,7 +6,7 @@
 </head>
 <body>
     <header>
-    <button type = 'button' class = "back-button" onclick ="window.location.href='index.jsp'" >Back</button>
+    <button type = 'button' class = "back-button" onclick ="window.location.href='index.jsp'" >Log Out</button>
       <div class = "container">
       <div class = "headers">
         <h1>Admin</h1>

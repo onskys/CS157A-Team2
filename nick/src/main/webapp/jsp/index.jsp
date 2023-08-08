@@ -26,9 +26,9 @@
 	          <p><%= errorMessage %></p>
 	        <% } %>
             <div class="forgot-signup">
-                <button type="button" name="pass" class="Pass" onclick="window.location.href='jsp/forgotpass.jsp'">Forgot Password</button>
-                <button type="button" name="signup" class="Pass" onclick="window.location.href='jsp/signup.jsp'">Sign Up</button>
-                 <button type="button" name="admin" class="Pass" onclick="window.location.href='jsp/adminlogin.jsp'">Admin Login</button>
+                <button type="button" name="pass" class="Pass" onclick="window.location.href='/cs157a_team2/jsp/forgotpass.jsp'">Forgot Password</button>
+                <button type="button" name="signup" class="Pass" onclick="window.location.href='/cs157a_team2/jsp/signup.jsp'">Sign Up</button>
+                 <button type="button" name="admin" class="Pass" onclick="window.location.href='/cs157a_team2/jsp/adminlogin.jsp'">Admin Login</button>
             </div>
             <% String successMessage = (String) request.getAttribute("successMessage");
     		if (successMessage != null && !successMessage.isEmpty()) { %>
