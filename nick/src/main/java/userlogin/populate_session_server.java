@@ -158,6 +158,10 @@ public class populate_session_server extends HttpServlet {
 					for(Song song : unplayed_songs) {
 						float[] temp_song_vector = {song.getAcousticness(), song.getDanceability(), song.getEnergy(), song.getInstrumentalness(), song.getValence()};
 						float temp_distance = Song.euclidian_distance(average_song_characteristics, temp_song_vector);
+						//===== edit
+						//song.setScore(temp_distance);
+						//===== end edit
+						
 	//					System.out.println(song.getName() + ": " + Float.toString(temp_distance));
 						if (temp_distance < best_distance) {
 	//						System.out.println("updating best song, original best_distace: " + Float.toString(best_distance) + " new best distance: " + Float.toString(temp_distance));
@@ -168,6 +172,12 @@ public class populate_session_server extends HttpServlet {
 					System.out.println("This will be the new suggested song: " + best_suggestion.getName());
 					System.out.println("with score: " + Float.toString(best_distance));
 					session.setAttribute("suggested_song", best_suggestion);
+					
+					
+					//=====edit
+					//session.setAttribute("unplayed_songs", unplayed_songs);
+					//=====end edit
+					
 					//request.setAttribute("suggested_song", best_suggestion);
 					
 				}
