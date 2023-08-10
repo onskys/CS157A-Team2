@@ -131,7 +131,7 @@ button[type="edit"] {
                 	    try {
                         Connection con = databaseconnection.getConnection();
                         Statement stmt = con.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT song.name, song.spotify_uri FROM song");
+                        ResultSet rs = stmt.executeQuery("SELECT song.name, song.spotify_uri FROM song WHERE song.spotify_uri NOT IN (SELECT dp.spotify_uri FROM default_playlist dp)");
                         while (rs.next()) {
                             String songName = rs.getString("name");
                             String spotify_uri = rs.getString("spotify_uri");
