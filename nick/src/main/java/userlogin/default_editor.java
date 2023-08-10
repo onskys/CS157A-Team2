@@ -68,9 +68,9 @@ public class default_editor extends HttpServlet {
 	        deleteStatement.setString(1, toDelete);
 	        deleteStatement.execute();
 	        
-	        PreparedStatement deleteStatementContains = con.prepareStatement("DELETE FROM playlist_contains_songs WHERE spotify_uri = ? AND playlist_id = 1");
-	        deleteStatementContains.setString(1, toDelete);
-	        deleteStatementContains.execute();
+//	        PreparedStatement deleteStatementContains = con.prepareStatement("DELETE FROM playlist_contains_songs WHERE spotify_uri = ? AND playlist_id = 1");
+//	        deleteStatementContains.setString(1, toDelete);
+//	        deleteStatementContains.execute();
 		    
 	        System.out.println("Song deleted successfully.");
 	
@@ -91,16 +91,16 @@ public class default_editor extends HttpServlet {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        String createDate = localDate.format(formatter);
 	        	        
-	        PreparedStatement addStatement = con.prepareStatement("INSERT INTO default_playlist (spotify_uri, add_date, admin_name) VALUES (?, ?, ?)");
+	        PreparedStatement addStatement = con.prepareStatement("INSERT INTO default_playlist (spotify_uri, add_date, admin_name) VALUES (?, NOW(), ?)");
 		    
 		    addStatement.setString(1, toAdd);
-		    addStatement.setString(2, createDate);
-		    addStatement.setString(3,  adminName);
+		    addStatement.setString(2,  adminName);
+		    addStatement.execute();
 		    
-	        PreparedStatement addStatementContains = con.prepareStatement("INSERT INTO playlist_contains_songs (playlist_id, spotify_uri) VALUES (1, ?)");
-		    addStatementContains.setString(1, toAdd);
-		    
-		    addStatementContains.execute();
+//	        PreparedStatement addStatementContains = con.prepareStatement("INSERT INTO playlist_contains_songs (playlist_id, spotify_uri) VALUES (1, ?)");
+//		    addStatementContains.setString(1, toAdd);
+//		    
+//		    addStatementContains.execute();
 	        
 		    // Execute
 		    int rowsInserted = addStatement.executeUpdate();
