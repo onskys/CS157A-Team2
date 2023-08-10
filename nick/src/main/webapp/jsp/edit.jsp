@@ -120,8 +120,12 @@ button[type="edit"] {
         		<% 
                 	    try {
                         Connection con = databaseconnection.getConnection();
-                        Statement stmt = con.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT song.name, song.spotify_uri FROM song");
+                        PreparedStatement selectNotAddedSongs = con.prepareStatement("SELECT name, spotify_uri FROM song s WHERE spotify_uri NOT IN (SELECT pcs.spotify_uri FROM playlist_contains_songs pcs WHERE playlist_id = ?);");
+                        selectNotAddedSongs.setString(1, (String) session.getAttribute("selectedPlaylistID"));
+                        ResultSet rs = selectNotAddedSongs.executeQuery();
+                        /* Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT song.name, song.spotify_uri FROM song"); */
+                        
                         while (rs.next()) {
                             String songName = rs.getString("name");
                             String spotify_uri = rs.getString("spotify_uri");
@@ -131,7 +135,7 @@ button[type="edit"] {
                         }
                         
                         rs.close();
-                        stmt.close();
+                        selectNotAddedSongs.close();
                         con.close();
                     } catch (SQLException e) {
                         e.printStackTrace();
