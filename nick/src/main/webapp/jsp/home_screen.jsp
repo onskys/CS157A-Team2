@@ -10,22 +10,28 @@
 <style>
 body {
 	font-family: Arial, sans-serif;
-	margin: 0;
+	margin: auto auto;
 	padding: 20px;
 	background-color: #f2f2f2;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	
 	min-height: 100vh;
 	flex-direction: column;
+	
+	
 }
 
 h1 {
+justify-content: center:
 	text-align: center;
+	
 }
 
+
+
 .button-container {
-	text-align: center;
+	
 }
 
 .button {
@@ -39,14 +45,24 @@ h1 {
 	margin: 10px;
 }
 
+.check{
+	color: red;
+	align-self: flex-end;
+	margin: 10px;
+	order: -1;
+}
+
 .button:hover {
 	background-color: #45a049;
 }
 </style>
 </head>
 <body>
+	<button type="button" name="check" class="check" onclick="window.location.href='/cs157a_team2/jsp/index.jsp'">Log Out</button>
+	<div class = "moving" >
 	<h1>Shuffle Buddy</h1>
 	<p>Welcome, ${sessionScope.username}!</p>
+	
 	<form id="playlist-form" action="../specific_playlist_server" method="get" autocomplete="off">
 		<label for="playlist-question">Choose a Playlist to Listen or Edit:</label> 
 		<select id="playlist-question" name="playlist-question" onchange="toggleButton()" required>
@@ -87,7 +103,7 @@ h1 {
 		<a href="#" class="button" onclick="deletePlaylist()">Delete A Playlist</a>		
 
 	</div>
-
+	</div>
 	<script>
 		
 	    function toggleButton() {

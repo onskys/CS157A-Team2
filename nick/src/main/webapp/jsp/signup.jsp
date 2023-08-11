@@ -19,15 +19,11 @@
             String username = request.getParameter("username");
             if (username != null && !username.isEmpty()) {
                 try {
-                    /* Class.forName("com.mysql.jdbc.Driver");
-                    String dbURL = "jdbc:mysql://localhost:3306/cs157a_team2?autoReconnect=true&useSSL=false";
-                    String dbUser = "root";
-                    String dbPassword = "Shroot123@";
-                    Connection con = DriverManager.getConnection(dbURL, dbUser, dbPassword); */
+                    
                     Connection con = databaseconnection.getConnection();
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "'");
-                    
+                    System.out.println("here");
                     if (rs.next()) {
                     	System.out.println("here");
                         // Username exists, display error message and allow the user to change it
