@@ -1,8 +1,7 @@
 # CS157A-Team2
 Team 2's repository for our Shuffle Buddy project.
 
-The downloadable code only includes The Piano Guys music, not the Linkin Park music. To use the Linkin Park Songs, download them from this drive and add them to the music folder in the project.
-https://drive.google.com/drive/folders/1EwzCwKSEuZrk6SMBFbxGoLYbg2jgFLiQ
+The download for this project is quite large, due to the collection of songs that is included in the download. This project will be over 100 MB to download.
 
 Shuffle Buddy Functionality:
 - Create an account and log in to use Shuffle Buddy.
