@@ -44,10 +44,12 @@ h1 {
 }
 
 .button-container {
-	text-align: center;
+	width: 100%;
+	display: flex; /* Use flexbox to arrange items */
+	flex-direction: column; /* Arrange items vertically (column) */
 }
 
-.button {
+/* .button {
 	display: inline-block;
 	padding: 10px 20px;
 	background-color: #4CAF50;
@@ -57,7 +59,7 @@ h1 {
 	border-radius: 4px;
 	cursor: pointer;
 	margin: 10px;
-}
+} */
 
 .h2 {
 	text-align: center;
@@ -69,8 +71,10 @@ h1 {
 
 button[type="button"] {
   display: block;
-  width: 20%;
+  width: 25%;
   padding: 10px;
+  /* height: 40px;
+  width: 80px; */
   align-item: center;
   background-color: #4caf50;
   margin-bottom: 20px;
@@ -85,8 +89,10 @@ button[type="button"] {
 
 button[type="submit"] {
   display: block;
-  width: 20%;
+  width: 25%;
   padding: 10px;
+  /* height: 40px;
+  width: 80px; */
   align-item: center;
   background-color: #4caf50;
   margin-bottom: 20px;
@@ -127,7 +133,7 @@ button[type="submit"] {
 		</audio>
 	</div>
 	<div class="time_display">
-		<span>0:00</span> <span>0:00</span>
+		<span>0:00</span> <span>--:--</span>
 	</div>
 
 	<div class="button-container">
@@ -140,10 +146,14 @@ button[type="submit"] {
 			<button href="#" class="button" type="submit">Home</button>
 		</form>
 	</div>
+	
+	
+	
+	
+	
+	
+	
 
-	<div class="time_display">
-		<span>0:00</span> <span>----</span>
-	</div>
 
 	<script>
 		const playButton = document.getElementById("playback_button");

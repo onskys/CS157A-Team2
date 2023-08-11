@@ -26,6 +26,8 @@ h1 {
 .button-container {
 	text-align: center;
 	align-items: center;
+	display: flex; /* Use flexbox to arrange items */
+	flex-direction: row; /* Arrange items vertically (column) */
 	
 }
 
@@ -44,19 +46,23 @@ h1 {
 
 button[type="start_listening"] {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   padding: 10px 20px;
-  margin-bottom: 15px;
   background-color: #4caf50;
   color: white;
+  margin-bottom: 15px;
+  border-radius: 4px;
   border: none;
-  border-radius: 3px;
   cursor: pointer;
+  margin: 10px;
 }
 
 .button:hover {
 	background-color: #45a049;
 }
+
+nav ul{height:200px; width:100%;}
+nav ul{overflow:hidden; overflow-y:scroll;}
 </style>
 </head>
 
@@ -64,6 +70,7 @@ button[type="start_listening"] {
 	<h1>Shuffle Buddy</h1>
 	<p>Welcome, ${sessionScope.username}!</p>
 	<p>This is playlist: ${sessionScope.selectedPlaylistName}</p>
+	<nav>
 	<ul>
 		<%
 		try{
@@ -89,18 +96,18 @@ button[type="start_listening"] {
             e.printStackTrace();
         }
     %>
-	</ul>                            
+	</ul> 
+	</nav>                           
 
 	<div class="button-container">
 		<form id="form1" action="start_session_server" method="get">
         	<button type="start_listening" >Start Listening</button>
     	</form>
+	
+	
+		<a href="#" class="button" onclick="goToEditPage()">Edit Playlist</a>
+		<a href="#" class="button" onclick="returnHome()">Home</a>
 	</div>
-	
-	<a href="#" class="button" onclick="goToEditPage()">Edit Playlist</a>
-	
-	<a href="#" class="button" onclick="returnHome()">Home</a>
-	
 
 	<script>
 		function goToEditPage() {

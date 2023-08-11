@@ -100,7 +100,8 @@ justify-content: center:
 
 	<div class="button-container">
 		<a href="#" class="button" onclick="createPlaylist()">Create New Playlist</a>
-		<a href="#" class="button" onclick="deletePlaylist()">Delete A Playlist</a>		
+		<a href="#" class="button" onclick="deletePlaylist()">Delete A Playlist</a>	
+		<a href="#" class="button" onclick="signOut()">Sign Out</a>		
 
 	</div>
 	</div>
@@ -123,6 +124,10 @@ justify-content: center:
 		
 		function deletePlaylist() {
 			window.location.href='../jsp/delete_playlist.jsp'
+		}
+		
+		function signOut() {
+			window.location.href='../jsp/index.jsp'
 		}
 	</script>
 </body>

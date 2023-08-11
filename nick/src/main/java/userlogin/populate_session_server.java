@@ -107,86 +107,96 @@ public class populate_session_server extends HttpServlet {
 				System.out.println("about to dispatch to delete session server");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/delete_session_server");
 				dispatcher.forward(request, response);
-			}
-			
-			// find the next song that should be played
-			// if this is the first song played in the session choose the first song
-			if (played_songs.size() == 0) {
-				session.setAttribute("suggested_song", unplayed_songs.get(0));
-				//request.setAttribute("suggested_song", unplayed_songs.get(0));
 			} else {
-				// find the average song characteristics vector adjusted for which songs the
-				// user has skipped or listened to in their entirety
-				int num_characteristics = 5;
-				float[] average_song_characteristics = new float[num_characteristics];
-				for (int i = 0; i < num_characteristics; i++) {
-					average_song_characteristics[i] = 0.0f;
-				}
-
-				for (Song song : played_songs) {
-					if (song.getDurration() > 15) {
-						average_song_characteristics[0] += song.getAcousticness();
-						average_song_characteristics[1] += song.getDanceability();
-						average_song_characteristics[2] += song.getEnergy();
-						average_song_characteristics[3] += song.getInstrumentalness();
-						average_song_characteristics[4] += song.getValence();
-					} else {
-						average_song_characteristics[0] += 1 - song.getAcousticness();
-						average_song_characteristics[1] += 1 - song.getDanceability();
-						average_song_characteristics[2] += 1 - song.getEnergy();
-						average_song_characteristics[3] += 1 - song.getInstrumentalness();
-						average_song_characteristics[4] += 1 - song.getValence();
+			
+				// find the next song that should be played
+				// if this is the first song played in the session choose the first song
+				if (played_songs.size() == 0) {
+					session.setAttribute("suggested_song", unplayed_songs.get(0));
+					//request.setAttribute("suggested_song", unplayed_songs.get(0));
+				} else {
+					// find the average song characteristics vector adjusted for which songs the
+					// user has skipped or listened to in their entirety
+					int num_characteristics = 5;
+					float[] average_song_characteristics = new float[num_characteristics];
+					for (int i = 0; i < num_characteristics; i++) {
+						average_song_characteristics[i] = 0.0f;
 					}
-				}
-
-				for (int i = 0; i < num_characteristics; i++) {
-					average_song_characteristics[i] = average_song_characteristics[i] / played_songs.size();
-				}
-				
-				System.out.print("average song characteristics: ");
-				for(int i = 0; i < 5; i++) {
-					System.out.print(Float.toString(average_song_characteristics[i]) + ", ");
-				} System.out.println();
-				
-				// iterate through the array of songs that have not been played yet and save the song with the lowest euclidian distance from the the
-				// average song characteristics vector
-				float best_distance = Float.MAX_VALUE;
-				Song best_suggestion = null;
-				
-//				System.out.println("====================\nThese are the scores of the unplayed songs: ");
-				
-				for(Song song : unplayed_songs) {
-					float[] temp_song_vector = {song.getAcousticness(), song.getDanceability(), song.getEnergy(), song.getInstrumentalness(), song.getValence()};
-					float temp_distance = Song.euclidian_distance(average_song_characteristics, temp_song_vector);
-//					System.out.println(song.getName() + ": " + Float.toString(temp_distance));
-					if (temp_distance < best_distance) {
-//						System.out.println("updating best song, original best_distace: " + Float.toString(best_distance) + " new best distance: " + Float.toString(temp_distance));
-						best_suggestion = song;
-						best_distance = temp_distance;
+	
+					for (Song song : played_songs) {
+						if (song.getDurration() > 15) {
+							average_song_characteristics[0] += song.getAcousticness();
+							average_song_characteristics[1] += song.getDanceability();
+							average_song_characteristics[2] += song.getEnergy();
+							average_song_characteristics[3] += song.getInstrumentalness();
+							average_song_characteristics[4] += song.getValence();
+						} else {
+							average_song_characteristics[0] += 1 - song.getAcousticness();
+							average_song_characteristics[1] += 1 - song.getDanceability();
+							average_song_characteristics[2] += 1 - song.getEnergy();
+							average_song_characteristics[3] += 1 - song.getInstrumentalness();
+							average_song_characteristics[4] += 1 - song.getValence();
+						}
 					}
+	
+					for (int i = 0; i < num_characteristics; i++) {
+						average_song_characteristics[i] = average_song_characteristics[i] / played_songs.size();
+					}
+					
+					System.out.print("average song characteristics: ");
+					for(int i = 0; i < 5; i++) {
+						System.out.print(Float.toString(average_song_characteristics[i]) + ", ");
+					} System.out.println();
+					
+					// iterate through the array of songs that have not been played yet and save the song with the lowest euclidian distance from the the
+					// average song characteristics vector
+					float best_distance = Float.MAX_VALUE;
+					Song best_suggestion = null;
+					
+	//				System.out.println("====================\nThese are the scores of the unplayed songs: ");
+					
+					for(Song song : unplayed_songs) {
+						float[] temp_song_vector = {song.getAcousticness(), song.getDanceability(), song.getEnergy(), song.getInstrumentalness(), song.getValence()};
+						float temp_distance = Song.euclidian_distance(average_song_characteristics, temp_song_vector);
+						//===== edit
+						//song.setScore(temp_distance);
+						//===== end edit
+						
+	//					System.out.println(song.getName() + ": " + Float.toString(temp_distance));
+						if (temp_distance < best_distance) {
+	//						System.out.println("updating best song, original best_distace: " + Float.toString(best_distance) + " new best distance: " + Float.toString(temp_distance));
+							best_suggestion = song;
+							best_distance = temp_distance;
+						}
+					}
+					System.out.println("This will be the new suggested song: " + best_suggestion.getName());
+					System.out.println("with score: " + Float.toString(best_distance));
+					session.setAttribute("suggested_song", best_suggestion);
+					
+					
+					//=====edit
+					//session.setAttribute("unplayed_songs", unplayed_songs);
+					//=====end edit
+					
+					//request.setAttribute("suggested_song", best_suggestion);
+					
 				}
-				System.out.println("This will be the new suggested song: " + best_suggestion.getName());
-				System.out.println("with score: " + Float.toString(best_distance));
-				session.setAttribute("suggested_song", best_suggestion);
-				//request.setAttribute("suggested_song", best_suggestion);
 				
-			}
-			
-			System.out.println("\n===== this is the suggested song =====");
-			
-			if (session.getAttribute("suggested_song") == null) {
-				System.out.println("End of playlist");
-			}
-			else {
-				((Song)session.getAttribute("suggested_song")).print();
+				System.out.println("\n===== this is the suggested song =====");
 				
-				System.out.println("about to dispatch to session page jsp");
-				response.sendRedirect("jsp/session_page.jsp");
-				// RequestDispatcher dispatcher =
-				// request.getRequestDispatcher("/populate_session_server");
-				// dispatcher.forward(request, response);
+				if (session.getAttribute("suggested_song") == null) {
+					System.out.println("End of playlist");
+				}
+				else {
+					((Song)session.getAttribute("suggested_song")).print();
+					
+					System.out.println("about to dispatch to session page jsp");
+					response.sendRedirect("jsp/session_page.jsp");
+					// RequestDispatcher dispatcher =
+					// request.getRequestDispatcher("/populate_session_server");
+					// dispatcher.forward(request, response);
+				}
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
